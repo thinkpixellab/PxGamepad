@@ -1,0 +1,18 @@
+# OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+# Sublime files
+*.sublime-*
+
+# WebStorm files
+.idea
+
+# NodeJS modules
+node_modules
+
+# Bower components
+bower_components
+
+# Project files
+[Bb]uild/
