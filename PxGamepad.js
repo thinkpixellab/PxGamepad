@@ -118,29 +118,29 @@
         
         // default to connected gamepad
         var gp = this.connectedGamepad;
+        if (gp) {
+            return gp;
+        }
         
-        if (!gp) {
+        // fetch all available gamepads
+        var gamepads;
+        if (navigator.getGamepads) {
+            gamepads = navigator.getGamepads();
+        } else if (navigator.webkitGetGamepads) {
+            gamepads = navigator.webkitGetGamepads();    
+        }
 
-            // fetch all available gamepads
-            var gamepads;
-            if (navigator.getGamepads) {
-                gamepads = navigator.getGamepads();
-            } else if (navigator.webkitGetGamepads) {
-                gamepads = navigator.webkitGetGamepads();    
-            }
-
-            // look for a standard mapped gamepad
-            if (gamepads) {
-                for (var i = 0, len = gamepads.length; i < len; i++) {
-                    if (gamepads[i].mapping === 'standard') {
-                        gp = gamepads[i];
-                        break;
-                    }
+        // look for a standard mapped gamepad
+        if (gamepads) {
+            for (var i = 0, len = gamepads.length; i < len; i++) {
+                gp = gamepads[i];
+                if (gp && gp.mapping === 'standard') {
+                    return gp;
                 }
             }
         }
 
-        return gp;
+        return null;
     };
 
     // should be called during each frame update
