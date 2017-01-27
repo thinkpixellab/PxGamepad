@@ -161,7 +161,7 @@
             isDown = this.buttons[name] = buttonPressed(gp, i);
 
             if (wasDown && !isDown) {
-                jQuery.each(this.callbacks[name] || [], function(callback) {
+                jQuery.each(this.callbacks[name] || [], function(i, callback) {
                     if (callback) { callback(); }
                 });
             }
